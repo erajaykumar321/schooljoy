@@ -1,0 +1,133 @@
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Dashboard</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="navbar-nav me-auto"></div>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Groups
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+        <button type="button" class="btn btn-outline-primary">Badges</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Chart Section -->
+<section class="chart-area">
+  <div class="container">
+    
+    <div class="back">
+      <i class="fas fa-angle-left"></i> Back
+    </div>
+    
+    <div class="d-flex section-title justify-content-between ">
+      <span class="fw-semibold fs-5">Graduation Track</span>
+      <img src="../assets/images/hamberger.svg" alt="">
+    </div>
+
+    <div class="row align-items-center">
+      <div class=" col-6">
+        <div class="row align-items-center">
+          <div class="col-6" id="pie-chart" style="height: 300px;"></div>
+          <div class="col-6">
+            <ng-container *ngFor="let item of list" >
+              <div class="row">
+                <span class="col-1" style="height: 16px; width: 16px !important; border-radius: 2px;" [ngStyle]="{ background: item.itemStyle.color}"></span>
+                <span class="col-8">{{item.name}}</span>
+                <span class="col-3">{{item.value}}</span>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 cards-wrapper">
+        <div class="row g-4">
+          <ng-container *ngFor="let stat of statistics" >
+            <div class=" col-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{stat.value}}{{stat.unit}}</h5>
+                  <p class="card-text">{{stat.name}}</p>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Tabs Section -->
+<section class="tabs-area">
+  <div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="Badges" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Badges</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="Students" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Students</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="Badges">
+        <form class="form-inline my-2">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search badges" aria-label="Search badges">
+        </form>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Badge</th>
+              <th scope="col">Total Goals</th>
+              <th scope="col">Completed</th>
+              <th scope="col">In Progress</th>
+              <th scope="col">Not Started</th>
+              <th scope="col">Completion Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let badge of badges">
+              <tr>
+                <th>
+                  <span class="icon p-2 d-inline-block ">
+                    <img src="../assets/images/Rocket.svg" alt="">
+                  </span>
+                  {{badge.name}}</th>
+                <td>{{badge.totalGoals}}</td>
+                <td>{{badge.completed}}</td>
+                <td>{{badge.inProgress}}</td>
+                <td>{{badge.notStarted}}</td>
+                <td>
+                  <div class="row align-items-center ">
+                    <div class="progress col-10 p-0">
+                      <div class="progress-bar w-75" role="progressbar" [attr.aria-valuenow]="badge.rate" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="col-2">{{badge.rate}}%</span>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="Students"></div>
+    </div>
+  </div>
+</section>
